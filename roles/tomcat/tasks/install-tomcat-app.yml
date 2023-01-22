@@ -1,0 +1,59 @@
+---
+  - name: install_configure_tomcat
+    hosts: 172.31.13.221
+    gather_facts: false
+    vars:
+      req_java: java-1.8.0-openjdk
+      tomcat_port: 8010
+    become: yes
+    become_user: root
+    tasks:
+      - name: updating repo
+        yum:
+          name: "*"
+          state: latest
+
+      - name: installing required java
+        yum:
+          name: "{{req_java}}"
+          state: present
+
+      - name: Downloading tomcat file
+        get_url:
+          url: https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.85/bin/apache-tomcat-8.5.85.tar.gz
+          dest: /usr/local/
+
+      - name: Extracting downlaod tomcat
+        unarchive:
+          src: "/usr/local/apache-tomcat-8.5.85.tar.gz"
+          dest: /usr/local/
+          remote_src: yes
+
+
+      - name: starting tomcat
+        shell: nohup /usr/local/apache-tomcat-8.5.85/bin/startup.sh
+
+      - name: Replacing default port with required port
+        template:
+           src: server.xml.j2
+           dest: /usr/local/apache-tomcat-8.5.85/conf/server.xml
+
+      - name: Changing manager_users
+        template:
+           src: context.xml.j2
+           dest: /usr/local/apache-tomcat-8.5.85/webapps/manager/META-INF/context.xml
+
+      - name: Changing Hostmanager_users
+        template:
+           src: context.xml.j2
+           dest:  /usr/local/apache-tomcat-8.5.85/webapps/host-manager/META-INF/context.xml
+
+      - name: tomcat-user
+        template:
+           src: tomcat-user.xml.j2
+           dest:  /usr/local/apache-tomcat-8.5.85/conf/tomcat-users.xml
+           notify:
+            - Start Tomcat
+
+
+
