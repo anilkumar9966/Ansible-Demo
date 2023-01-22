@@ -34,22 +34,22 @@
         shell: nohup /usr/local/apache-tomcat-8.5.85/bin/startup.sh
 
       - name: Replacing default port with required port
-        templates:
+        template:
            src: server.xml.j2
            dest: /usr/local/apache-tomcat-8.5.85/conf/server.xml
 
       - name: Changing manager_users
-        templates:
+        template:
            src: context.xml.j2
            dest: /usr/local/apache-tomcat-8.5.85/webapps/manager/META-INF/context.xml
 
       - name: Changing Hostmanager_users
-        templates:
+        template:
            src: context.xml.j2
            dest:  /usr/local/apache-tomcat-8.5.85/webapps/host-manager/META-INF/context.xml
 
       - name: tomcat-user
-        templates:
+        template:
            src: tomcat-user.xml.j2
            dest:  /usr/local/apache-tomcat-8.5.85/conf/tomcat-users.xml
            notify:
