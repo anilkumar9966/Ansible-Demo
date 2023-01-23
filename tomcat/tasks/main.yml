@@ -10,7 +10,7 @@
           name: "*"
           state: latest
 
-      - name: installing required java
+      - name: install openjdk 11
         yum:
           name: "{{java_package}}"
           state: present
