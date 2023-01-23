@@ -1,9 +1,4 @@
 --- 
-  - name: updating repo
-    yum:
-      name: "*"
-      state: latest
-
   - name: install openjdk 11
     yum:
       name: "{{java_package}}"
