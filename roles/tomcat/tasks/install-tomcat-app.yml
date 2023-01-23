@@ -32,36 +32,13 @@
 
       - name: starting tomcat
         shell: nohup /usr/local/apache-tomcat-8.5.85/bin/startup.sh
-
-      - name: Replacing default port with required port
-        template:
-           src: server.xml.j2
-           dest: /usr/local/apache-tomcat-8.5.85/conf/server.xml
-           remote_src: yes
-
-
-      - name: Changing manager_users
-        template:
-           src: context.xml.j2
-           dest: /usr/local/apache-tomcat-8.5.85/webapps/manager/META-INF/context.xml
-           remote_src: yes
-
-
-      - name: Changing Hostmanager_users
-        template:
-           src: context.xml.j2
-           dest:  /usr/local/apache-tomcat-8.5.85/webapps/host-manager/META-INF/context.xml
-           remote_src: yes
-
-
-      - name: tomcat-user
-        template:
-           src: tomcat-user.xml.j2
-           dest:  /usr/local/apache-tomcat-8.5.85/conf/tomcat-users.xml
-           remote_src: yes
-
-           notify:
+        
+      - name: Deploy war file to tomcat server
+        copy:
+         src: /var/lib/jenkins/workspace/Ansible-Jenkins/target/LoginWebApp-2.war
+         dest: /usr/local/apache-tomcat-8.5.85/webapps
+          notify:
             - Start Tomcat
 
 
-
+      
