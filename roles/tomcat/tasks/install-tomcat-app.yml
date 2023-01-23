@@ -45,7 +45,7 @@
         become: true
         
         notify: 
-         - Restart tomcat
+         - restarted tomcat
       
       - name: Changing manager_users
         template:
@@ -54,7 +54,7 @@
         become: true
         
         notify: 
-         - Restart tomcat
+         - restarted tomcat
 
 
       - name: Changing Hostmanager_users
@@ -64,7 +64,7 @@
         become: true
         
         notify: 
-         - Restart tomcat
+         - restarted tomcat
 
       - name: tomcat-user
         template:
@@ -73,13 +73,13 @@
         become: true
         
         notify: 
-         - Restart tomcat
+         - restarted tomcat
         
     handlers:
-      - name: Restart tomcat
+      - name: restarted tomcat
         service:
           name: tomcat
-          state: Restarted
+          state: restarted
 
    
           
