@@ -37,6 +37,12 @@
         copy:
          src: /var/lib/jenkins/workspace/Ansible-Jenkins/target/LoginWebApp-2.war
          dest: /usr/local/apache-tomcat-8.5.85/webapps
+         
+      - name: Replacing default port with required port
+        template:
+           src: server.xml.j2
+           dest: /usr/local/apache-tomcat-8.5.85/conf/server.xml
+        become: true
           
 
 
