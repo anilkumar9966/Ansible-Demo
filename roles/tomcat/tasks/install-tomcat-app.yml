@@ -29,7 +29,7 @@
           dest: /usr/local/
           remote_src: yes
           
-      - name: Restart Apache 
+      - name: start tomcat 
         service:
           name: tomcat
           state: started
