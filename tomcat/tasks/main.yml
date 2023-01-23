@@ -33,7 +33,6 @@
            dest: /usr/local/apache-tomcat-{{tomcat_version}}/conf/server.xml
         become: true
 
-
       - name: Changing manager_users
         template:
            src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/manager-context.xml.j2
@@ -53,8 +52,7 @@
            src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/tomcat-users.xml.j2
            dest:  /usr/local/apache-tomcat-{{tomcat_version}}/conf/tomcat-users.xml
         become: true
-		
-	  - name: Deploy war file to tomcat server
+      - name: Deploy war file to tomcat server
         copy:
           src: /var/lib/jenkins/workspace/Ansible-Jenkins/target/LoginWebApp-2.war
           dest: /usr/local/apache-tomcat-{{tomcat_version}}/webapps
