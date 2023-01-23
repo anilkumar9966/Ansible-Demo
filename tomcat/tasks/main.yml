@@ -18,7 +18,7 @@
 
      - name: installing java
        yum:
-          name: req_java
+          name: "{{req_java}}"
           state: present
 
      - name: Download tomcat if not installed
