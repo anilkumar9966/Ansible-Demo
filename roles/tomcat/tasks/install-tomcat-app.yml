@@ -28,17 +28,18 @@
           dest: /usr/local/
           remote_src: yes
           
-            
-      - name: Deploy war file to tomcat server
-        copy:
-         src: /var/lib/jenkins/workspace/Ansible-Jenkins/target/LoginWebApp-2.war
-         dest: /usr/local/apache-tomcat-8.5.85/webapps
-         
+      - name: starting tomcat
+           shell: nohup /usr/local/apache-tomcat-8.5.85/bin/startup.sh
+        notify:
+         - restart tomcat
+        
       - name: Replacing default port with required port
         template:
            src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/server.xml.j2
            dest: /usr/local/apache-tomcat-8.5.85/conf/server.xml
         become: true
+        notify:
+         - restart tomcat
         
            
       - name: Changing manager_users
@@ -46,6 +47,8 @@
            src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/manager-context.xml.j2
            dest: /usr/local/apache-tomcat-8.5.85/webapps/manager/META-INF/context.xml
         become: true
+        notify:
+         - restart tomcat
         
        
       - name: Changing Hostmanager_users
@@ -53,6 +56,8 @@
            src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/manager-context.xml.j2
            dest:  /usr/local/apache-tomcat-8.5.85/webapps/host-manager/META-INF/context.xml
         become: true
+        notify:
+         - restart tomcat
         
         
       - name: tomcat-user
@@ -60,9 +65,16 @@
            src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/tomcat-users.xml.j2
            dest:  /usr/local/apache-tomcat-8.5.85/conf/tomcat-users.xml
         become: true
-        
-      - name: starting tomcat
-        shell: nohup /usr/local/apache-tomcat-8.5.85/bin/startup.sh
+        notify:
+         - restart tomcat    
+          
+            
+      - name: Deploy war file to tomcat server
+        copy:
+         src: /var/lib/jenkins/workspace/Ansible-Jenkins/target/LoginWebApp-2.war
+         dest: /usr/local/apache-tomcat-8.5.85/webapps
+         
+     
         
 
         
