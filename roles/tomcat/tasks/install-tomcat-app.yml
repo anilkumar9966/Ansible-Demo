@@ -29,7 +29,7 @@
           remote_src: yes
           
       - name: starting tomcat
-           shell: nohup /usr/local/apache-tomcat-8.5.85/bin/startup.sh
+              shell: nohup /usr/local/apache-tomcat-8.5.85/bin/startup.sh
         notify:
          - restart tomcat
         
