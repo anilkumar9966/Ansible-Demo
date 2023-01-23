@@ -63,8 +63,8 @@
        copy:
           src: /var/lib/jenkins/workspace/Ansible-Jenkins/target/LoginWebApp-2.war
           dest: /usr/local/apache-tomcat-{{tomcat_version}}/webapps
-       notify:
-         - restart the tomcat server
+     - name: restart the tomcat server
+       shell: nohup /usr/local/apache-tomcat-8.5.85/bin/startup.sh
 
 
 
