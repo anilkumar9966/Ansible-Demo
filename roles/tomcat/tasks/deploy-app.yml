@@ -1,5 +1,1 @@
----
-- name: Deploy war file to tomcat server
-        copy:
-         src: /var/lib/jenkins/workspace/Ansible-Jenkins/target/LoginWebApp-2.war
-         dest: /usr/local/apache-tomcat-8.5.85/webapps
+
