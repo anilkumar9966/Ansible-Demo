@@ -60,7 +60,7 @@
 
       - name: tomcat-user
         template:
-           src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/tomcat-user.xml.j2
+           src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/tomcat-users.xml.j2
            dest:  /usr/local/apache-tomcat-8.5.85/conf/tomcat-users.xml
         become: true
         notify:
