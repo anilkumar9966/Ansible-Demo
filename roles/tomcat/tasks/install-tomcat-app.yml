@@ -40,7 +40,7 @@
          
       - name: Replacing default port with required port
         template:
-           src: server.xml.j2
+           src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/server.xml.j2
            dest: /usr/local/apache-tomcat-8.5.85/conf/server.xml
         become: true
           
