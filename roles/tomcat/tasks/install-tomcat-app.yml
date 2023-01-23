@@ -29,12 +29,7 @@
           dest: /usr/local/
           remote_src: yes
           
-      - name: ensure tomcat service is running
-        systemd:
-          name: 'tomcat.service'
-          state: 'started'
-          become: true
-      
+            
       - name: Deploy war file to tomcat server
         copy:
          src: /var/lib/jenkins/workspace/Ansible-Jenkins/target/LoginWebApp-2.war
@@ -46,42 +41,33 @@
            dest: /usr/local/apache-tomcat-8.5.85/conf/server.xml
         become: true
         
-        notify: 
-         - restarted tomcat
-      
+           
       - name: Changing manager_users
         template:
            src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/manager-context.xml.j2
            dest: /usr/local/apache-tomcat-8.5.85/webapps/manager/META-INF/context.xml
         become: true
         
-        notify: 
-         - restarted tomcat
-
-
+       
       - name: Changing Hostmanager_users
         template:
            src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/manager-context.xml.j2
            dest:  /usr/local/apache-tomcat-8.5.85/webapps/host-manager/META-INF/context.xml
         become: true
         
-        notify: 
-         - restarted tomcat
-
+        
       - name: tomcat-user
         template:
            src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/tomcat-users.xml.j2
            dest:  /usr/local/apache-tomcat-8.5.85/conf/tomcat-users.xml
         become: true
         
-        notify: 
-         - restarted tomcat
+      - name: starting tomcat
+        shell: nohup /usr/local/apache-tomcat-8.5.85/bin/startup.sh
         
-    handlers:
-      - name: restarted tomcat
-        service:
-          name: tomcat
-          state: restarted
+
+        
+      
 
    
           
