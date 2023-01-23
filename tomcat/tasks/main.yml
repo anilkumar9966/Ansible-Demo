@@ -2,6 +2,11 @@
   - name: install_configure_tomcat
     hosts: tomcat
     gather_facts: false
+    req_java: java-1.8.0-openjdk
+    tomcat_version: 8.5.85
+    tomcat_url: https://dlcdn.apache.org/tomcat/tomcat-{{tomcat_version.split('.')[0]}}/v{{tomcat_version}}/bin/apache-tomcat-{{tomcat_version}}.tar.gz
+    tomcat_admin_user: tomcat
+    tomcat_admin_password: tomcat
     become: yes
     become_user: root
     tasks:
@@ -12,7 +17,7 @@
 
       - name: installing java
         yum:
-          name: java-1.8.0-openjdk
+          name: req_java
           state: present
 
       - name: Download tomcat if not installed
