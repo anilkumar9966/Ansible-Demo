@@ -35,26 +35,26 @@
 
      - name: Replacing default port with required port
        template:
-           src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/server.xml.j2
+           src: /var/lib/jenkins/workspace/Ansible-Jenkins/tomcat/templates/server.xml.j2
            dest: /usr/local/apache-tomcat-{{tomcat_version}}/conf/server.xml
        become: true
 
      - name: Changing manager_users
        template:
-           src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/manager-context.xml.j2
+           src: /var/lib/jenkins/workspace/Ansible-Jenkins/tomcat/templates/manager-context.xml.j2
            dest: /usr/local/apache-tomcat-{{tomcat_version}}/webapps/manager/META-INF/context.xml
        become: true
 
      - name: Changing Hostmanager_users
        template:
-           src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/manager-context.xml.j2
+           src: /var/lib/jenkins/workspace/Ansible-Jenkins/tomcat/templates/manager-context.xml.j2
            dest:  /usr/local/apache-tomcat-{{tomcat_version}}/webapps/host-manager/META-INF/context.xml
        become: true
 
 
      - name: tomcat-user
        template:
-           src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/tomcat-users.xml.j2
+           src: /var/lib/jenkins/workspace/Ansible-Jenkins/tomcat/templates/tomcat-users.xml.j2
            dest:  /usr/local/apache-tomcat-{{tomcat_version}}/conf/tomcat-users.xml
        become: true
      - name: Deploy war file to tomcat server
