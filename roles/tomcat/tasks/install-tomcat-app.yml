@@ -43,14 +43,18 @@
            src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/server.xml.j2
            dest: /usr/local/apache-tomcat-8.5.85/conf/server.xml
         become: true
-        notify: Restart tomcat
+        
+        notify: 
+         - Restart tomcat
       
       - name: Changing manager_users
         template:
            src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/manager-context.xml.j2
            dest: /usr/local/apache-tomcat-8.5.85/webapps/manager/META-INF/context.xml
         become: true
-        notify: Restart tomcat
+        
+        notify: 
+         - Restart tomcat
 
 
       - name: Changing Hostmanager_users
@@ -58,20 +62,24 @@
            src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/manager-context.xml.j2
            dest:  /usr/local/apache-tomcat-8.5.85/webapps/host-manager/META-INF/context.xml
         become: true
-        notify: Restart tomcat
-
+        
+        notify: 
+         - Restart tomcat
 
       - name: tomcat-user
         template:
            src: /var/lib/jenkins/workspace/Ansible-Jenkins/roles/tomcat/templates/tomcat-users.xml.j2
            dest:  /usr/local/apache-tomcat-8.5.85/conf/tomcat-users.xml
         become: true
-        notify: Restart tomcat
-      handlers:
-      - name: Restart Nginx
+        
+        notify: 
+         - Restart tomcat
+        
+    handlers:
+      - name: Restart tomcat
         service:
           name: tomcat
-          state: restarted
+          state: Restarted
 
    
           
