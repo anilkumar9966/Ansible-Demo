@@ -29,13 +29,11 @@
           dest: /usr/local/
           remote_src: yes
           
-      - name: start tomcat 
-        service:
-          name: tomcat
-          state: started
+      - name: ensure tomcat service is running
+        systemd:
+          name: 'tomcat.service'
+          state: 'started'
           become: true
-
-
       
       - name: Deploy war file to tomcat server
         copy:
