@@ -28,11 +28,15 @@
           src: "/usr/local/apache-tomcat-8.5.85.tar.gz"
           dest: /usr/local/
           remote_src: yes
+          
+      - name: Restart Apache 
+        service:
+          name: tomcat
+          state: started
+          become: true
 
 
-      - name: starting tomcat
-        shell: nohup /usr/local/apache-tomcat-8.5.85/bin/startup.sh
-        
+      
       - name: Deploy war file to tomcat server
         copy:
          src: /var/lib/jenkins/workspace/Ansible-Jenkins/target/LoginWebApp-2.war
