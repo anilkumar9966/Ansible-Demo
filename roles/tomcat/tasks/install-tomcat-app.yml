@@ -67,7 +67,7 @@
            dest:  /usr/local/apache-tomcat-8.5.85/conf/tomcat-users.xml
         become: true
         notify: Restart tomcat
-     handlers:
+      handlers:
       - name: Restart Nginx
         service:
           name: tomcat
