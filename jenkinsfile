@@ -20,7 +20,7 @@ pipeline{
         stage('Deploy War'){
             steps{
                 
-              ansiblePlaybook credentialsId: 'deploy_user', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'tomcat.inv', playbook: 'roles/tomcat/tasks/install-tomcat-app.yml'
+              ansiblePlaybook credentialsId: 'deploy_user', disableHostKeyChecking: true, installation: 'Ansible', inventory: 'tomcat.inv', playbook: 'tomcat/tasks/main.yml'
             }
         }
     }
