@@ -4,7 +4,7 @@
   <groupId>com.devops4solutions</groupId>
   <artifactId>LoginWebApp</artifactId>
   <packaging>war</packaging>
-  <version>2</version>
+  <version>5</version>
   <name>LoginWebApp Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
@@ -25,7 +25,7 @@
 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.3.1</version>
+                    <version>3.3.3</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
